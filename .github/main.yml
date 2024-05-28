@@ -1,0 +1,28 @@
+name: CanChat RAG - Main Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      ACR: scscdsaicanchatacr
+      ACR_URL: scscdsaicanchatacr.azurecr.io
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ env.ACR_URL }}
+          username: ${{ env.ACR }}
+          password: ${{ secrets.ACR_PWD }}
+
+      - run: |
+          docker build . -t $ACR_URL/canchat-rag:${{ github.sha }}
+          docker push $ACR_URL/canchat-rag:${{ github.sha }}
