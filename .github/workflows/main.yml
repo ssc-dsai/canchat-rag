@@ -24,5 +24,6 @@ jobs:
           password: ${{ secrets.ACR_PWD }}
 
       - run: |
-          docker build . -t $ACR_URL/canchat-rag:${{ github.sha }} --build-arg="SUPABASE_URL=${{ secrets.SUPABASE_URL}}" --build-arg="SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY}}"
+          echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY}}\nNEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL}}" > .env
+          docker build . -t $ACR_URL/canchat-rag:${{ github.sha }}
           docker push $ACR_URL/canchat-rag:${{ github.sha }}
