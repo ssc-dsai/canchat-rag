@@ -109,6 +109,16 @@ redirect_uri = ""
 # or any other third-party OIDC providers.
 url = ""
 
+[auth.external.azure]
+enabled = "env(SUPABASE_AUTH_EXTERNAL_AZURE_ENABLED)"
+client_id = "env(SUPABASE_AUTH_EXTERNAL_AZURE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_AZURE_SECRET)"
+# Overrides the default auth redirectUrl.
+redirect_uri = "env(SUPABASE_AUTH_EXTERNAL_AZURE_REDIRECT_URI)"
+# Overrides the default auth provider URL. Used to support self-hosted gitlab, single-tenant Azure,
+# or any other third-party OIDC providers.
+url = "env(SUPABASE_AUTH_EXTERNAL_AZURE_URL)"
+
 [analytics]
 enabled = false
 port = 54327
