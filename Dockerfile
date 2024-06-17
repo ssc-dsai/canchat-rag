@@ -2,6 +2,7 @@ FROM node:22-slim as builder
 WORKDIR /app
 
 COPY package*.json ./
+ENV SUPABASE_AUTH_EXTERNAL_AZURE_ENABLED=false
 
 RUN npm ci
 
